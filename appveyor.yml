@@ -1,4 +1,4 @@
-version: 1.01.00-{build}
+version: 1.01.00
 
 configuration:
   - Debug
@@ -23,7 +23,7 @@ build:
 after_build:
   # https://github.com/chocolatey/chocolatey/issues/431
   - cmake -E remove -f c:\programdata\chocolatey\bin\cpack.exe
-  - cpack -C %configuration%
+  - cpack -P milkytracker_%platform% -C %configuration%
 
 artifacts:
   - path: build\milkytracker*.zip
@@ -39,4 +39,5 @@ deploy:
   overwrite: true
   on:
     branch: appveyor
+    configuration: Release
     #appveyor_repo_tag: true        # deploy on tag push only
